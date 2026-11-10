@@ -3,7 +3,7 @@
 Companion repository for the manuscript
 
 > **Density Is a Symptom, Not a Lever: A Controlled Study of Lossy Input Compression in 3D Gaussian Splatting**
-> Tianji Su, Business School, Ningbo University, China
+> Tianji Su, Ningbo University, China
 
 The paper measures what lossy input compression does to 3D Gaussian Splatting (3DGS) under a
 single-variable protocol: only the JPEG quality factor at training resolution is varied, a
