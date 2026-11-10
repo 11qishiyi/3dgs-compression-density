@@ -76,10 +76,11 @@ ledger and metrics are included.
 ## License
 
 - Our code (`code/`, `scripts/`) is released under the MIT license (`LICENSE`).
-- Our data (`data/`, `figures/`) is released under CC BY 4.0.
+- Our data and figures (`data/`, `figures/`) are released under CC BY 4.0.
 - `code/train_codec2.py` and any file derived from the official 3DGS code remain under the
   Inria/MPII Gaussian-Splatting license (non-commercial research use); see
   `third_party/LICENSE-Inria.md`.
+- See `NOTICE.md` for the complete data/third-party notice.
 
 ## Repository
 

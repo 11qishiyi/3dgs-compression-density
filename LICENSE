@@ -19,15 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-Data and figures (data/, figures/) are released under the Creative Commons
-Attribution 4.0 International license (CC BY 4.0):
-https://creativecommons.org/licenses/by/4.0/
-
-Third-party notice: code/train_codec2.py is derived from the official
-gaussian-splatting implementation by Inria and MPII and remains subject to the
-Gaussian-Splatting License (non-commercial research use). Its text is
-reproduced in third_party/LICENSE-Inria.md. The official code itself is not
-redistributed in this repository.
