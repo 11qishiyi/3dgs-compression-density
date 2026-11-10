@@ -46,7 +46,7 @@ upstream commit was used, which files were modified (also summarised in `patches
 how to apply the modifications. Our modified training entry point is included as
 `code/train_codec2.py` for transparency; it is a derivative of the official `train.py` and remains
 subject to the Inria/MPII Gaussian-Splatting license (non-commercial research use), whose text is
-reproduced in `third_party/LICENSE-Inria.md`.
+reproduced in `third_party/INRIA-LICENSE.md`.
 
 ## Reproducing the numbers
 
@@ -79,7 +79,7 @@ ledger and metrics are included.
 - Our data and figures (`data/`, `figures/`) are released under CC BY 4.0.
 - `code/train_codec2.py` and any file derived from the official 3DGS code remain under the
   Inria/MPII Gaussian-Splatting license (non-commercial research use); see
-  `third_party/LICENSE-Inria.md`.
+  `third_party/INRIA-LICENSE.md`.
 - See `NOTICE.md` for the complete data/third-party notice.
 
 ## Repository
@@ -90,3 +90,4 @@ ledger and metrics are included.
 
 If you use this code or data, please cite the manuscript (see `CITATION.cff`). A Zenodo DOI for
 this release will be added after acceptance.
+
