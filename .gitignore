@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+output/
+outputs/
+*.ply
+*.tar
+*.tgz
+*.zip
+checkpoints/
+renders/
+renders_3v/
+data/mip360/
+data/bench/
+.ipynb_checkpoints/
+.DS_Store

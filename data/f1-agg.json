@@ -1,0 +1,338 @@
+{
+  "baseline": {
+    "3k": {
+      "s1": {
+        "psnr": 28.085,
+        "gaussians": 809430,
+        "run": "q20_hyb_3k_s1"
+      },
+      "s2": {
+        "psnr": 27.902,
+        "gaussians": 815324,
+        "run": "q20_hyb_3k_s2"
+      }
+    },
+    "7k": {
+      "s1": {
+        "psnr": 29.022,
+        "gaussians": 921652,
+        "run": "q20_hyb_7k_s1"
+      },
+      "s2": {
+        "psnr": 28.9844,
+        "gaussians": 915666,
+        "run": "bonsai_q20_7k_s2"
+      }
+    }
+  },
+  "probe": {
+    "0.003": {
+      "psnr": 28.0597,
+      "gain_vs_s1": -0.0253,
+      "gaussians": 840152,
+      "density_pct": 3.8
+    },
+    "0.01": {
+      "psnr": 28.2569,
+      "gain_vs_s1": 0.1719,
+      "gaussians": 897516,
+      "density_pct": 10.9
+    },
+    "0.03": {
+      "psnr": 28.259,
+      "gain_vs_s1": 0.174,
+      "gaussians": 1084106,
+      "density_pct": 33.9
+    },
+    "0.1": {
+      "psnr": 28.1035,
+      "gain_vs_s1": 0.0185,
+      "gaussians": 1761918,
+      "density_pct": 117.7
+    },
+    "0.3": {
+      "psnr": 27.2668,
+      "gain_vs_s1": -0.8182,
+      "gaussians": 3867320,
+      "density_pct": 377.8
+    },
+    "1.0": {
+      "psnr": 25.4037,
+      "gain_vs_s1": -2.6813,
+      "gaussians": 46400000,
+      "density_pct": 5632.4
+    }
+  },
+  "A": {
+    "0.003": {
+      "3k": {
+        "rows": [
+          {
+            "seed": 1,
+            "psnr": 28.0597,
+            "base_psnr": 28.085,
+            "gain": -0.0253,
+            "ssim": 0.8837,
+            "gaussians": 840152,
+            "base_gaussians": 809430,
+            "density_pct": 3.8
+          },
+          {
+            "seed": 2,
+            "psnr": 27.9846,
+            "base_psnr": 27.902,
+            "gain": 0.0826,
+            "ssim": 0.8809,
+            "gaussians": 839340,
+            "base_gaussians": 815324,
+            "density_pct": 2.9
+          }
+        ],
+        "gain_mean": 0.0287,
+        "gain_sd": 0.076,
+        "psnr_mean": 28.0221,
+        "ssim_mean": 0.8823,
+        "gaussians_mean": 839746,
+        "density_pct_mean": 3.3
+      },
+      "7k": {
+        "rows": [
+          {
+            "seed": 1,
+            "psnr": 29.1041,
+            "base_psnr": 29.022,
+            "gain": 0.0821,
+            "ssim": 0.8984,
+            "gaussians": 951410,
+            "base_gaussians": 921652,
+            "density_pct": 3.2
+          },
+          {
+            "seed": 2,
+            "psnr": 29.0439,
+            "base_psnr": 28.9844,
+            "gain": 0.0595,
+            "ssim": 0.897,
+            "gaussians": 954940,
+            "base_gaussians": 915666,
+            "density_pct": 4.3
+          }
+        ],
+        "gain_mean": 0.0708,
+        "gain_sd": 0.016,
+        "psnr_mean": 29.074,
+        "ssim_mean": 0.8977,
+        "gaussians_mean": 953175,
+        "density_pct_mean": 3.8
+      }
+    },
+    "0.01": {
+      "3k": {
+        "rows": [
+          {
+            "seed": 1,
+            "psnr": 28.2569,
+            "base_psnr": 28.085,
+            "gain": 0.1719,
+            "ssim": 0.8838,
+            "gaussians": 897516,
+            "base_gaussians": 809430,
+            "density_pct": 10.9
+          },
+          {
+            "seed": 2,
+            "psnr": 27.981,
+            "base_psnr": 27.902,
+            "gain": 0.079,
+            "ssim": 0.8808,
+            "gaussians": 901193,
+            "base_gaussians": 815324,
+            "density_pct": 10.5
+          }
+        ],
+        "gain_mean": 0.1255,
+        "gain_sd": 0.066,
+        "psnr_mean": 28.119,
+        "ssim_mean": 0.8823,
+        "gaussians_mean": 899354,
+        "density_pct_mean": 10.7
+      },
+      "7k": {
+        "rows": [
+          {
+            "seed": 1,
+            "psnr": 29.0349,
+            "base_psnr": 29.022,
+            "gain": 0.0129,
+            "ssim": 0.8959,
+            "gaussians": 1033817,
+            "base_gaussians": 921652,
+            "density_pct": 12.2
+          }
+        ],
+        "gain_mean": 0.0129,
+        "gain_sd": null,
+        "psnr_mean": 29.0349,
+        "ssim_mean": 0.8959,
+        "gaussians_mean": 1033817,
+        "density_pct_mean": 12.2
+      }
+    }
+  },
+  "B": {
+    "3k": {
+      "base": {
+        "psnr": 28.3538,
+        "psnr_sd": 0.152,
+        "ssim": 0.8952,
+        "gaussians": 830038,
+        "per_seed": [
+          28.4613,
+          28.2462
+        ],
+        "density_pct": 0.0
+      },
+      "hinge": {
+        "psnr": 28.5054,
+        "psnr_sd": 0.153,
+        "ssim": 0.8947,
+        "gaussians": 970713,
+        "per_seed": [
+          28.6135,
+          28.3974
+        ],
+        "density_pct": 16.9,
+        "paired_gain": [
+          0.1522,
+          0.1512
+        ],
+        "paired_gain_mean": 0.1517
+      },
+      "frame": {
+        "psnr": 28.33,
+        "psnr_sd": 0.187,
+        "ssim": 0.8968,
+        "gaussians": 861343,
+        "per_seed": [
+          28.462,
+          28.1981
+        ],
+        "density_pct": 3.8,
+        "paired_gain": [
+          0.0007,
+          -0.0481
+        ],
+        "paired_gain_mean": -0.0237
+      }
+    },
+    "7k": {
+      "base": {
+        "psnr": 29.4948,
+        "psnr_sd": 0.042,
+        "ssim": 0.9132,
+        "gaussians": 938093,
+        "per_seed": [
+          29.4652,
+          29.5245
+        ],
+        "density_pct": 0.0
+      },
+      "hinge": {
+        "psnr": 29.5784,
+        "psnr_sd": 0.085,
+        "ssim": 0.9132,
+        "gaussians": 1108179,
+        "per_seed": [
+          29.6382,
+          29.5185
+        ],
+        "density_pct": 18.1,
+        "paired_gain": [
+          0.173,
+          -0.006
+        ],
+        "paired_gain_mean": 0.0835
+      },
+      "frame": {
+        "psnr": 29.523,
+        "psnr_sd": 0.154,
+        "ssim": 0.9156,
+        "gaussians": 997372,
+        "per_seed": [
+          29.6316,
+          29.4145
+        ],
+        "density_pct": 6.3,
+        "paired_gain": [
+          0.1664,
+          -0.11
+        ],
+        "paired_gain_mean": 0.0282
+      }
+    },
+    "3k_gap_vs_clean": 0.4942
+  },
+  "fixed": {
+    "c0": {
+      "psnr": 27.8943,
+      "ssim": 0.8804,
+      "gaussians": 812673,
+      "vs_c1": -0.6697
+    },
+    "c1": {
+      "psnr": 28.564,
+      "ssim": 0.8927,
+      "gaussians": 812673
+    },
+    "c4": {
+      "psnr": 28.9311,
+      "ssim": 0.9073,
+      "gaussians": 812673,
+      "vs_c1": 0.3671
+    },
+    "h_0003": {
+      "psnr": 28.5724,
+      "ssim": 0.8927,
+      "gaussians": 812673,
+      "vs_c1": 0.0084
+    },
+    "h_001": {
+      "psnr": 28.5869,
+      "ssim": 0.8927,
+      "gaussians": 812673,
+      "vs_c1": 0.0229
+    },
+    "c2": {
+      "psnr": 28.4272,
+      "ssim": 0.8885,
+      "gaussians": 812673,
+      "vs_c1": -0.1368
+    },
+    "c3": {
+      "psnr": 28.6394,
+      "ssim": 0.8946,
+      "gaussians": 812673,
+      "vs_c1": 0.0754
+    },
+    "l2": {
+      "psnr": 28.6254,
+      "ssim": 0.8881,
+      "gaussians": 812673,
+      "vs_c1": 0.0614
+    },
+    "dct_u": {
+      "psnr": 28.6315,
+      "ssim": 0.8884,
+      "gaussians": 812673,
+      "vs_c1": 0.0675
+    },
+    "dct_w": {
+      "psnr": 28.649,
+      "ssim": 0.8891,
+      "gaussians": 812673,
+      "vs_c1": 0.085
+    },
+    "headroom": 0.3671,
+    "continuation_gain": 0.6697
+  }
+}

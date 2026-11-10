@@ -1,0 +1,197 @@
+run_id,date,scene,protocol,codec_qp,resolution,iterations,gaussians,psnr_test,status,notes
+env_probe_01,2026-11-05,n/a,n/a,n/a,n/a,n/a,n/a,n/a,ok,torch 2.9.0+hip6.3 dev BW 68.7GB
+dgr_build_01,2026-11-05,n/a,n/a,n/a,n/a,n/a,n/a,n/a,ok,_C 12.2MB; 3 HIP patches
+dgr_forward_01,2026-11-05,synthetic,n/a,n/a,n/a,n/a,200,n/a,ok,"200/200 gaussians, 3717 px lit"
+sknn_scale_01,2026-11-05,synthetic,n/a,n/a,n/a,n/a,800000,n/a,ok,distCUDA2 800k 0.05s
+train_stall_diag,2026-11-06,bonsai,full,clean,1,30000,n/a,n/a,resolved,root cause OMP thread oversubscription; cgroup 63.3GB not hit
+smoke_r4,2026-11-06,bonsai,r4,clean,4,1000,n/a,n/a,ok,25.86 it/s after 4 fixes
+clean_r4,2026-11-06,bonsai,r4,clean,4,7000,1022389,30.61,ok,compression applied before downsampling
+q20_r4,2026-11-06,bonsai,r4,20,4,7000,998168,30.06,ok,-2.4% gaussians
+clean_r4res,2026-11-06,bonsai,r4res,clean,1,7000,1045855,30.217,ok,main protocol; edge 0.6131 vs random 0.6209
+q20_r4res,2026-11-06,bonsai,r4res,20,1,7000,927191,28.585,ok,-11.3% gaussians; edge 0.6072 vs random 0.6250
+c3_q20_2k,2026-11-06,bonsai,r4res,20,1,2000,n/a,26.62,ok,smoke; gate fired; no matched baseline
+c3_q20_7k,2026-11-06,bonsai,r4res,20,1,7000,n/a,n/a,interrupted,process died at iter 1260; no eval line; suspected memory (K=3 graphs + 1.03M gaussians)
+job11250_probe_1,2026-11-06,n/a,n/a,n/a,n/a,n/a,n/a,n/a,rejected,sbatch: memory:CPU ratio exceeded (8GB per 1 core)
+job11250_probe_2,2026-11-06,n/a,n/a,n/a,n/a,n/a,n/a,n/a,ok,jobId 126979883 completed on i03r4n01; CPU node X86; no nvidia-smi; python3 not found; pypi/github 000; inputFiles landed
+q20_hyb_7k,2026-11-06,bonsai,r4res-hyb,20,1,7000,n/a,n/a,pending,"main metric vs original; dataset uploaded, blocked by ssh gateway"
+q50_hyb_7k,2026-11-06,bonsai,r4res-hyb,50,1,7000,n/a,n/a,pending,dataset built locally (107MB)
+q80_hyb_7k,2026-11-06,bonsai,r4res-hyb,80,1,7000,n/a,n/a,pending,dataset built locally (114MB)
+blur_hyb_7k,2026-11-06,bonsai,r4res-hyb,blur,1,7000,n/a,n/a,pending,blur sigma=0.40 matched to q20 HF energy 10.70->8.95
+noise_hyb_7k,2026-11-06,bonsai,r4res-hyb,noise,1,7000,n/a,n/a,pending,block noise sigma=7.43/255 matched to q20 residual RMS
+deblock_7k,2026-11-06,bonsai,r4res-hyb,20,1,7000,n/a,n/a,pending,NLM denoise baseline (125MB)
+clean_r4res_30k,2026-11-06,bonsai,r4res,clean,1,30000,n/a,n/a,pending,paper-value alignment
+oracle_tau_2k,2026-11-06,bonsai,r4res,20,1,2000,n/a,n/a,pending,"tau in {1e-4,5e-4,1e-3}"
+fast3k_clean,2026-11-06,bonsai,r4res,clean,r4res,3000,912516,28.726,ok,torch 2.5.1 dtk2604; hybrid test=original
+fast3k_q80,2026-11-06,bonsai,r4res,q80,r4res,3000,885239,28.585,ok,dPSNR -0.142; dG -3.0%
+fast3k_q50,2026-11-06,bonsai,r4res,q50,r4res,3000,854923,28.328,ok,dPSNR -0.398; dG -6.3%
+fast3k_q20,2026-11-06,bonsai,r4res,q20,r4res,3000,809500,27.908,ok,dPSNR -0.818; dG -11.3%
+fast3k_deblock,2026-11-06,bonsai,r4res,q20_deblock,r4res,3000,770279,27.700,ok,deblock worse than q20
+fast3k_blur,2026-11-06,bonsai,r4res,blur_s0.40,r4res,3000,885233,28.654,ok,high-freq loss only; dPSNR -0.072
+fast3k_noise,2026-11-06,bonsai,r4res,noise_s7.43,r4res,3000,848558,28.518,ok,white noise only; dPSNR -0.208
+fast3k_c3_q20,2026-11-06,bonsai,r4res,q20+c3,r4res,3000,3468350,27.559,neg,"C3 K=1 q=0.05 sigma=0.02; 3.80x gaussians, gate anti-conservative"
+env_recover_06,2026-11-06,n/a,n/a,n/a,n/a,n/a,n/a,n/a,ok,DCU torch restored via 2.5.1+das.opt1.dtk2604 wheel; rasterizer+sknn rebuilt
+oracle_tau_1e-4_3k,2026-11-06,bonsai,r4res,q20+tau1e-4,r4res,3000,1899944,27.824,ok,max_grad 1e-4 denser; dPSNR -0.084 vs base; 178s
+oracle_tau_5e-4_3k,2026-11-06,bonsai,r4res,q20+tau5e-4,r4res,3000,332580,27.711,ok,max_grad 5e-4; dPSNR -0.197; 129s
+oracle_tau_1e-3_3k,2026-11-06,bonsai,r4res,q20+tau1e-3,r4res,3000,240875,27.571,ok,max_grad 1e-3; dPSNR -0.337; 137s
+oracle_tau_2e-3_3k,2026-11-06,bonsai,r4res,q20+tau2e-3,r4res,3000,213897,27.354,ok,max_grad 2e-3; dPSNR -0.554; 134s
+clean_7k_t251,2026-11-06,bonsai,r4res,clean,r4res,7000,1039872,30.299,ok,torch 2.5.1 same-env baseline; old 2.9.0 was 30.217 (+0.08)
+q20_hyb_7k_t251,2026-11-06,bonsai,r4res,q20,r4res,7000,919647,29.060,ok,"torch 2.5.1; dPSNR -1.239 vs clean, dG -11.6%"
+ft_c1_600,2026-11-06,bonsai,r4res,q20+ft600_target_y,r4res,3600,809500,28.556,ok,control: +0.648 vs C0(27.908); 60s
+ft_c2_600,2026-11-06,bonsai,r4res,q20+ft600_pocs,r4res,3600,809500,28.379,neg,POCS projection; -0.178 vs C1; 76s
+ft_c3_600,2026-11-06,bonsai,r4res,q20+ft600_wiener,r4res,3600,809500,28.619,neg,Wiener mix; +0.063 vs C1 (<0.10 gate); 71s
+ft_c4_600,2026-11-06,bonsai,r4res,q20+ft600_oracle_clean,r4res,3600,809500,28.920,ok,oracle ceiling: +0.364 vs C1; 61s
+clean_3k_s1,2026-11-06,bonsai,r4res,clean,r4res,3000,912104,28.963,ok,seed1; +0.237 vs seed0(28.726); 156s
+q80_hyb_3k_s1,2026-11-06,bonsai,r4res,q80,r4res,3000,882300,28.772,ok,seed1; -0.191 vs clean_s1; 142s
+q50_hyb_3k_s1,2026-11-06,bonsai,r4res,q50,r4res,3000,846024,28.634,ok,seed1; 166s
+q20_hyb_3k_s1,2026-11-06,bonsai,r4res,q20,r4res,3000,809430,28.085,ok,seed1; 141s
+clean_3k_s2,2026-11-06,bonsai,r4res,clean,r4res,3000,917992,28.780,ok,seed2; 160s
+q80_hyb_3k_s2,2026-11-06,bonsai,r4res,q80,r4res,3000,883889,28.623,ok,seed2; 156s
+q50_hyb_3k_s2,2026-11-06,bonsai,r4res,q50,r4res,3000,850555,28.371,ok,seed2; 151s
+q20_hyb_3k_s2,2026-11-06,bonsai,r4res,q20,r4res,3000,815324,27.902,ok,seed2; 161s
+clean_15k,2026-11-06,bonsai,r4res,clean,r4res,15000,1052399,31.550,ok,trend point; +1.251 vs clean 7k; 714s
+clean_3k_s3,2026-11-06,bonsai,r4res,clean,r4res,3000,914784,28.924,ok,seed3; 143s
+q20_hyb_3k_s3,2026-11-06,bonsai,r4res,q20,r4res,3000,808086,28.092,ok,seed3; 153s
+q20_15k,2026-11-06,bonsai,r4res,q20,r4res,15000,918011,29.895,ok,trend; compression cost grows with budget; 682s
+q20_444_3k_s0,2026-11-06,bonsai,r4res,q20_444,r4res,3000,814129,28.103,ok,4:4:4 no chroma subsampling; 160s
+q20_444_3k_s1,2026-11-06,bonsai,r4res,q20_444,r4res,3000,810561,28.289,ok,4:4:4 seed1; 153s
+ft_c1_s1,2026-11-06,bonsai,r4res,q20+ft600_target_y,r4res,3600,809500,28.556,ok,C1 seed1; 60s
+ft_c3_s1,2026-11-06,bonsai,r4res,q20+ft600_wiener,r4res,3600,809500,28.619,ok,C3 seed1; 67s
+bicycle_clean_7k,2026-11-06,bicycle,r4res,clean,r4res,7000,3211121,23.722,ok,second scene; 1236x821; 70min
+bonsai_clean_30k,2026-11-06,bonsai,r4res,clean,r4res,30000,1042502,32.822,ok,anchor; 1380s
+bicycle_q20_hyb_7k,2026-11-06,bicycle,r4res,q20,r4res,7000,2954729,23.623,ok,second scene q20; dPSNR -0.099 vs clean
+clean_7k_s1,2026-11-06,bonsai,r4res,clean,r4res,7000,1042227,30.364,ok,7k seed1; 336s
+q20_hyb_7k_s1,2026-11-06,bonsai,r4res,q20,r4res,7000,921652,29.022,ok,7k seed1; 327s
+jsgs_lite_q20_3k,2026-11-06,bonsai,r4res,q20+jsgs_lite,r4res,3000,206555,26.881,neg,DCT-weighted loss scale=1; density collapsed → confounded
+jsgs_lite_s40_q20_3k,2026-11-06,bonsai,r4res,q20+jsgs_lite_x40,r4res,3000,590223,27.919,neg,scale=40; +0.011 vs baseline (not significant); density 590k
+dct_uniform_q20_3k,2026-11-06,bonsai,r4res,q20+dct_uniform,r4res,3000,207194,26.955,neg,grad-matched lambda=0.966; frac>tau 0.0001; density collapsed
+dct_weighted_q20_3k,2026-11-06,bonsai,r4res,q20+dct_weighted,r4res,3000,206612,26.910,neg,grid-matched lambda=0.975; frac>tau 0.0001; C-B=-0.045
+full_l2_q20_3k,2026-11-06,bonsai,r4res,q20+pixL2,r4res,3000,218658,27.321,neg,pixel L2 full training; density 219k (confounded vs 810k)
+ft4_l1,2026-11-06,bonsai,r4res,q20+ft600_L1,r4res,3600,809500,28.556,ok,fixed-topology L1; reproduces C1 28.556 exactly
+ft4_l2,2026-11-06,bonsai,r4res,q20+ft600_L2,r4res,3600,809500,28.618,ok,fixed-topology pixel L2; +0.062 vs L1
+ft4_dct_u,2026-11-06,bonsai,r4res,q20+ft600_DCTu,r4res,3600,809500,28.625,ok,fixed-topology uniform DCT-L2; +0.069 vs L1
+ft4_dct_w,2026-11-06,bonsai,r4res,q20+ft600_DCTw,r4res,3600,809500,28.631,ok,fixed-topology weighted DCT-L2; +0.075 vs L1 (<+0.10 gate)
+clean_15k_s1,2026-11-06,bonsai,r4res,clean,r4res,15000,1046713,31.650,ok,15k seed1; +0.100 vs seed0(31.550)
+q20_hyb_30k,2026-11-06,bonsai,r4res,q20,r4res,30000,944605,30.453,ok,30k q20; gap vs clean 30k(32.822) = -2.369
+q20_hyb_15k_s1,2026-11-06,bonsai,r4res,q20,r4res,15000,921182,29.755,ok,15k seed1; paired with clean_15k_s1: -1.895
+counter_clean_3k,2026-11-06,counter,r4res,clean,r4res,3000,677557,26.329,ok,third scene; 240 imgs 778x519
+counter_q20_hyb_3k,2026-11-06,counter,r4res,q20,r4res,3000,590939,25.765,ok,"third scene q20; dPSNR -0.563, dG -12.8%"
+counter_clean_7k,2026-11-06,counter,r4res,clean,r4res,7000,922843,27.562,ok,third scene 7k
+counter_q20_hyb_7k,2026-11-06,counter,r4res,q20,r4res,7000,744959,26.764,neg,"third scene q20 7k; dPSNR -0.798, dG -19.3%"
+counter_q20_444_3k,2026-11-06,counter,r4res,q20_444,r4res,3000,577613,25.965,ok,"counter 4:4:4; quant -0.364, chroma -0.200, sum -0.564 = measured"
+q80_hyb_7k,2026-11-06,bonsai,r4res,q80,r4res,7000,1008712,29.960,ok,7k QP curve; dPSNR -0.372 vs clean 7k(30.332)
+q50_hyb_7k,2026-11-06,bonsai,r4res,q50,r4res,7000,965962,29.699,ok,7k QP curve; dPSNR -0.633
+iso_bpp_q14_444_3k,2026-11-06,bonsai,r4res,q14_444,r4res,3000,795861,27.748,neg,iso-bpp: 0.459 vs 0.441 bpp; PSNR -0.160 vs q20 4:2:0 -> 4:4:4 not better at matched rate
+garden_clean_3k,2026-11-06,garden,r4res,clean,r4res,3000,1849032,24.770,ok,clean reference; paired with garden_q20_hyb_3k; density not instrumented
+garden_q20_hyb_3k,2026-11-06,garden,r4res,q20,r4res,3000,1597277,24.283,ok,garden q20 3k; dPSNR -0.487 vs clean 24.770; count not instrumented
+counter_clean_30k,2026-11-06,counter,r4res,clean,r4res,30000,,29.357,ok,counter 30k clean; from log [ITER 30000] Evaluating test 29.3572
+counter_q20_hyb_30k,2026-11-06,counter,r4res,q20,r4res,30000,,27.950,neg,counter 30k q20; dPSNR -1.407 vs clean 29.357
+kitchen_clean_3k,2026-11-06,kitchen,r4res,clean,r4res,3000,975168,27.776,ok,kitchen 3k clean; log PSNR 27.7757
+kitchen_q20_hyb_3k,2026-11-06,kitchen,r4res,q20,r4res,3000,788185,26.205,neg,"kitchen 3k q20; dPSNR -1.571, dG -19.2%"
+garden_clean_7k,2026-11-06,garden,r4res,clean,r4res,7000,3524008,26.188,ok,garden 7k clean only; log PSNR 26.1880
+stump_clean_3k,2026-11-06,stump,r4res,clean,r4res,3000,1310176,23.874,ok,stump 3k clean; log PSNR 23.8743
+room_clean_3k,2026-11-06,room,r4res,clean,r4res,3000,678623,29.203,ok,room 3k clean; log PSNR 29.2030
+room_q20_hyb_3k,2026-11-06,room,r4res,q20,r4res,3000,575319,28.470,neg,"room 3k q20; dPSNR -0.733, dG -15.2%"
+stump_q20_hyb_3k,2026-11-06,stump,r4res,q20,r4res,3000,1294820,23.811,neg,"stump 3k q20; dPSNR -0.063, dG -1.2% (weak-texture outlier)"
+bonsai_clean_30k_s1,2026-11-08,bonsai,clean,98,779x519,30000,1061976,32.7664,ok,MatPool A100-40GB seed top-up
+bonsai_q20_30k_s1,2026-11-08,bonsai,q20 hybrid,20,779x519,30000,935922,30.4328,ok,MatPool A100-40GB seed top-up
+bonsai_clean_30k_s2,2026-11-08,bonsai,clean,98,779x519,30000,1062345,32.7246,ok,MatPool A100-40GB seed top-up
+bonsai_q20_30k_s2,2026-11-08,bonsai,q20 hybrid,20,779x519,30000,943346,30.4639,ok,MatPool A100-40GB seed top-up
+bonsai_clean_7k_s2,2026-11-08,bonsai,clean,98,779x519,7000,1036511,30.0903,ok,MatPool A100-40GB seed top-up
+bonsai_q20_7k_s2,2026-11-08,bonsai,q20 hybrid,20,779x519,7000,915666,28.9844,ok,MatPool A100-40GB seed top-up
+bonsai_clean_15k_s2,2026-11-08,bonsai,clean,98,779x519,15000,1057560,31.6711,ok,MatPool A100-40GB seed top-up
+bonsai_q20_15k_s2,2026-11-08,bonsai,q20 hybrid,20,779x519,15000,929656,29.8998,ok,MatPool A100-40GB seed top-up
+counter_clean_3k_s1,2026-11-09,counter,clean,98,778x519,3000,677043,26.1685,ok,MatPool A100-40GB 3k seed top-up
+counter_q20_3k_s1,2026-11-09,counter,q20 hybrid,20,778x519,3000,590073,25.6599,ok,MatPool A100-40GB 3k seed top-up
+counter_clean_3k_s2,2026-11-09,counter,clean,98,778x519,3000,676696,26.2456,ok,MatPool A100-40GB 3k seed top-up
+counter_q20_3k_s2,2026-11-09,counter,q20 hybrid,20,778x519,3000,586033,25.7768,ok,MatPool A100-40GB 3k seed top-up
+kitchen_clean_3k_s1,2026-11-09,kitchen,clean,98,778x519,3000,970794,27.6513,ok,MatPool A100-40GB 3k seed top-up
+kitchen_q20_3k_s1,2026-11-09,kitchen,q20 hybrid,20,778x519,3000,790512,26.1477,ok,MatPool A100-40GB 3k seed top-up
+kitchen_clean_3k_s2,2026-11-09,kitchen,clean,98,778x519,3000,969647,27.8755,ok,MatPool A100-40GB 3k seed top-up
+kitchen_q20_3k_s2,2026-11-09,kitchen,q20 hybrid,20,778x519,3000,800177,26.2712,ok,MatPool A100-40GB 3k seed top-up
+room_clean_3k_s1,2026-11-09,room,clean,98,778x519,3000,683149,28.6275,ok,MatPool A100-40GB 3k seed top-up
+room_q20_3k_s1,2026-11-09,room,q20 hybrid,20,778x519,3000,582050,28.1054,ok,MatPool A100-40GB 3k seed top-up
+room_clean_3k_s2,2026-11-09,room,clean,98,778x519,3000,686759,28.8537,ok,MatPool A100-40GB 3k seed top-up
+room_q20_3k_s2,2026-11-09,room,q20 hybrid,20,778x519,3000,582960,28.2858,ok,MatPool A100-40GB 3k seed top-up
+stump_clean_3k_s1,2026-11-09,stump,clean,98,1244x825,3000,1308155,23.8046,ok,MatPool A100-40GB 3k seed top-up
+stump_q20_3k_s1,2026-11-09,stump,q20 hybrid,20,1244x825,3000,1284118,23.6667,ok,MatPool A100-40GB 3k seed top-up
+stump_clean_3k_s2,2026-11-09,stump,clean,98,1244x825,3000,1307154,23.8511,ok,MatPool A100-40GB 3k seed top-up
+stump_q20_3k_s2,2026-11-09,stump,q20 hybrid,20,1244x825,3000,1307433,23.7228,ok,MatPool A100-40GB 3k seed top-up
+garden_clean_3k_s1,2026-11-09,garden,clean,98,1296x840,3000,1862105,24.5371,ok,MatPool A100-40GB 3k seed top-up
+garden_q20_3k_s1,2026-11-09,garden,q20 hybrid,20,1296x840,3000,1611387,24.1025,ok,MatPool A100-40GB 3k seed top-up
+garden_clean_3k_s2,2026-11-09,garden,clean,98,1296x840,3000,1854505,24.7019,ok,MatPool A100-40GB 3k seed top-up
+garden_q20_3k_s2,2026-11-09,garden,q20 hybrid,20,1296x840,3000,1604562,24.2387,ok,MatPool A100-40GB 3k seed top-up
+bonsai_q20_3k_s1_codec,2026-11-09,bonsai,q20 hybrid + codec loss,20,779x519,3000,816406,28.1474,ok,MatPool A100 round-2
+bonsai_q20_3k_s2_codec,2026-11-09,bonsai,q20 hybrid + codec loss,20,779x519,3000,820361,27.9397,ok,MatPool A100 round-2
+bonsai_q20_7k_s1_codec,2026-11-09,bonsai,q20 hybrid + codec loss,20,779x519,7000,924343,29.0235,ok,MatPool A100 round-2
+bonsai_q20_7k_s2_codec,2026-11-09,bonsai,q20 hybrid + codec loss,20,779x519,7000,923147,28.9942,ok,MatPool A100 round-2
+truck_clean_3k_s1,2026-11-09,truck,clean,98,979x546,3000,1060088,22.7946,ok,MatPool A100 round-2
+truck_clean_3k_s2,2026-11-09,truck,clean,98,979x546,3000,1054803,22.8556,ok,MatPool A100 round-2
+truck_q20_3k_s1,2026-11-09,truck,q20 hybrid,20,979x546,3000,913715,22.6477,ok,MatPool A100 round-2
+truck_q20_3k_s2,2026-11-09,truck,q20 hybrid,20,979x546,3000,907854,22.7548,ok,MatPool A100 round-2
+truck_clean_7k_s1,2026-11-09,truck,clean,98,979x546,7000,1672161,23.9135,ok,MatPool A100 round-2
+truck_clean_7k_s2,2026-11-09,truck,clean,98,979x546,7000,1689221,23.7827,ok,MatPool A100 round-2
+truck_q20_7k_s1,2026-11-09,truck,q20 hybrid,20,979x546,7000,1337349,23.7289,ok,MatPool A100 round-2
+truck_q20_7k_s2,2026-11-09,truck,q20 hybrid,20,979x546,7000,1343455,23.5302,ok,MatPool A100 round-2
+playroom_clean_3k_s1,2026-11-09,playroom,clean,98,1264x832,3000,753181,27.8481,ok,MatPool A100 round-2
+playroom_clean_3k_s2,2026-11-09,playroom,clean,98,1264x832,3000,748040,27.9615,ok,MatPool A100 round-2
+playroom_q20_3k_s1,2026-11-09,playroom,q20 hybrid,20,1264x832,3000,680011,27.9969,ok,MatPool A100 round-2
+playroom_q20_3k_s2,2026-11-09,playroom,q20 hybrid,20,1264x832,3000,676734,27.8093,ok,MatPool A100 round-2
+playroom_clean_7k_s1,2026-11-09,playroom,clean,98,1264x832,7000,1480474,29.8459,ok,MatPool A100 round-2
+playroom_clean_7k_s2,2026-11-09,playroom,clean,98,1264x832,7000,1473539,29.5023,ok,MatPool A100 round-2
+playroom_q20_7k_s1,2026-11-09,playroom,q20 hybrid,20,1264x832,7000,1254347,29.2692,ok,MatPool A100 round-2
+playroom_q20_7k_s2,2026-11-09,playroom,q20 hybrid,20,1264x832,7000,1240052,29.1864,ok,MatPool A100 round-2
+f1_a_hinge003_3k_s1,2026-11-09,bonsai,q20 hybrid,20,779x519,3000,840152,28.0597,ok,MatPool A100 F1
+f1_a_hinge01_3k_s1,2026-11-09,bonsai,q20 hybrid,20,779x519,3000,897516,28.2569,ok,MatPool A100 F1
+f1_a_hinge003_3k_s2,2026-11-09,bonsai,q20 hybrid,20,779x519,3000,839340,27.9846,ok,MatPool A100 F1
+f1_a_hinge01_3k_s2,2026-11-09,bonsai,q20 hybrid,20,779x519,3000,901193,27.9810,ok,MatPool A100 F1
+f1_a_hinge003_7k_s1,2026-11-09,bonsai,q20 hybrid,20,779x519,7000,951410,29.1041,ok,MatPool A100 F1
+f1_a_hinge003_7k_s2,2026-11-09,bonsai,q20 hybrid,20,779x519,7000,954940,29.0439,ok,MatPool A100 F1
+f1_a_hinge01_7k_s1,2026-11-09,bonsai,q20 hybrid,20,779x519,7000,1033817,29.0349,ok,MatPool A100 F1
+f1_b_base_3k_s1,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,3000,829694,28.4613,ok,MatPool A100 F1
+f1_b_base_3k_s2,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,3000,830382,28.2462,ok,MatPool A100 F1
+f1_b_hinge_3k_s1,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,3000,968031,28.6135,ok,MatPool A100 F1
+f1_b_hinge_3k_s2,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,3000,973396,28.3974,ok,MatPool A100 F1
+f1_b_frame_3k_s1,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,3000,856135,28.4620,ok,MatPool A100 F1
+f1_b_frame_3k_s2,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,3000,866552,28.1981,ok,MatPool A100 F1
+f1_b_base_7k_s1,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,7000,938297,29.4652,ok,MatPool A100 F1
+f1_b_base_7k_s2,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,7000,937890,29.5245,ok,MatPool A100 F1
+f1_b_hinge_7k_s1,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,7000,1109547,29.6382,ok,MatPool A100 F1
+f1_b_hinge_7k_s2,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,7000,1106811,29.5185,ok,MatPool A100 F1
+f1_b_frame_7k_s1,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,7000,989578,29.6316,ok,MatPool A100 F1
+f1_b_frame_7k_s2,2026-11-09,bonsai_mix,mixed q20/q50,20,779x519,7000,1005167,29.4145,ok,MatPool A100 F1
+f1_c0,2026-11-09,bonsai,q20 hybrid,20,779x519,3000,812673,27.8943,ok,MatPool A100 F1
+f1_ft_c1,2026-11-09,bonsai,fixed topology 600it,20,779x519,600,812673,28.5640,ok,MatPool A100 F1
+f1_ft_c4,2026-11-09,bonsai,fixed topology 600it,20,779x519,600,812673,28.9311,ok,MatPool A100 F1
+f1_ft_h003,2026-11-09,bonsai,fixed topology 600it,20,779x519,600,812673,28.5724,ok,MatPool A100 F1
+f1_ft_h01,2026-11-09,bonsai,fixed topology 600it,20,779x519,600,812673,28.5869,ok,MatPool A100 F1
+f1_ft_c2,2026-11-09,bonsai,fixed topology 600it,20,779x519,600,812673,28.4272,ok,MatPool A100 F1
+f1_ft_c3,2026-11-09,bonsai,fixed topology 600it,20,779x519,600,812673,28.6394,ok,MatPool A100 F1
+f1_ft4_l2,2026-11-09,bonsai,fixed topology 600it,20,779x519,600,812673,28.6254,ok,MatPool A100 F1
+f1_ft4_dct_u,2026-11-09,bonsai,fixed topology 600it,20,779x519,600,812673,28.6315,ok,MatPool A100 F1
+f1_ft4_dct_w,2026-11-09,bonsai,fixed topology 600it,20,779x519,600,812673,28.6490,ok,MatPool A100 F1
+f1_dct_uniform_3k,2026-11-09,bonsai,q20 hybrid,20,779x519,3000,207162,26.9437,ok,MatPool A100 F1
+f1_dct_weighted_3k,2026-11-09,bonsai,q20 hybrid,20,779x519,3000,206631,26.9387,ok,MatPool A100 F1
+f1_a_hinge03_3k_s1,2026-11-09,bonsai,q20 hybrid + interval loss probe,20,779x519,3000,1084106,28.2590,ok,MatPool A100 F1 lambda probe (0.03); count from ply header
+f1_a_hinge10_3k_s1,2026-11-09,bonsai,q20 hybrid + interval loss probe,20,779x519,3000,1761918,28.1035,ok,MatPool A100 F1 lambda probe (0.1); count from ply header
+f1_a_hinge30_3k_s1,2026-11-09,bonsai,q20 hybrid + interval loss probe,20,779x519,3000,3867320,27.2668,ok,MatPool A100 F1 lambda probe (0.3); count from ply header
+f1_a_hinge100_3k_s1,2026-11-09,bonsai,q20 hybrid + interval loss probe,20,779x519,3000,11339440,25.4037,neg,diverged: 2.8 GB point cloud; vertex count derived from file size at 248 B/vertex (header not captured)
+counter_clean_7k_s1,2026-11-09,counter,clean,98,,7000,921652,27.5389,ok,MatPool D9 seed top-up
+counter_q20_hyb_7k_s1,2026-11-09,counter,q20 hybrid,20,,7000,743565,26.7428,ok,MatPool D9 seed top-up
+counter_clean_7k_s2,2026-11-09,counter,clean,98,,7000,925876,27.5263,ok,MatPool D9 seed top-up
+counter_q20_hyb_7k_s2,2026-11-09,counter,q20 hybrid,20,,7000,738877,26.6956,ok,MatPool D9 seed top-up
+counter_clean_30k_s1,2026-11-09,counter,clean,98,,30000,962121,29.3573,ok,MatPool D9 seed top-up
+counter_q20_hyb_30k_s1,2026-11-09,counter,q20 hybrid,20,,30000,767840,27.8866,ok,MatPool D9 seed top-up
+counter_clean_30k_s2,2026-11-09,counter,clean,98,,30000,973270,29.3602,ok,MatPool D9 seed top-up
+counter_q20_hyb_30k_s2,2026-11-09,counter,q20 hybrid,20,,30000,777547,27.9496,ok,MatPool D9 seed top-up
+bicycle_clean_7k_s1,2026-11-09,bicycle,clean,98,,7000,3246477,23.7223,ok,MatPool D9 seed top-up
+bicycle_q20_hyb_7k_s1,2026-11-09,bicycle,q20 hybrid,20,,7000,2923403,23.5929,ok,MatPool D9 seed top-up
+bicycle_clean_7k_s2,2026-11-09,bicycle,clean,98,,7000,3191190,23.7540,ok,MatPool D9 seed top-up
+bicycle_q20_hyb_7k_s2,2026-11-09,bicycle,q20 hybrid,20,,7000,2942414,23.6083,ok,MatPool D9 seed top-up
+truck_clean_3k_s3,2026-11-09,truck,clean,98,,3000,1054733,22.8189,ok,MatPool D9 seed top-up
+truck_q20_3k_s3,2026-11-09,truck,q20 hybrid,20,,3000,907326,22.7378,ok,MatPool D9 seed top-up
+truck_clean_7k_s3,2026-11-09,truck,clean,98,,7000,1678620,24.0419,ok,MatPool D9 seed top-up
+truck_q20_7k_s3,2026-11-09,truck,q20 hybrid,20,,7000,1334613,23.8075,ok,MatPool D9 seed top-up
+playroom_clean_3k_s3,2026-11-09,playroom,clean,98,,3000,752458,28.0236,ok,MatPool D9 seed top-up
+playroom_q20_3k_s3,2026-11-09,playroom,q20 hybrid,20,,3000,675280,27.9551,ok,MatPool D9 seed top-up
+playroom_clean_7k_s3,2026-11-09,playroom,clean,98,,7000,1459589,29.7085,ok,MatPool D9 seed top-up
+playroom_q20_7k_s3,2026-11-09,playroom,q20 hybrid,20,,7000,1232993,29.1692,ok,MatPool D9 seed top-up
